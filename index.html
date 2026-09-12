@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reddit Mental Health NLP Analysis | Aya Abdine</title>
+
+<style>
+:root{
+  --bg:#ffffff;
+  --soft:#f7f9f9;
+  --text:#17202a;
+  --muted:#667085;
+  --accent:#128277;
+  --border:#e4e7ec;
+  --shadow:0 10px 30px rgba(16,24,40,.06);
+  --radius:18px;
+  --max:1120px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(92%,var(--max));
+  margin:auto;
+}
+
+section{
+  padding:85px 0;
+}
+
+.section-label{
+  color:var(--accent);
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+h1,h2,h3{
+  line-height:1.15;
+}
+
+h2{
+  font-size:clamp(1.9rem,3vw,2.6rem);
+  margin-bottom:18px;
+}
+
+h3{
+  font-size:1.08rem;
+  margin-bottom:8px;
+}
+
+.lead{
+  max-width:820px;
+  color:var(--muted);
+  font-size:1.04rem;
+}
+
+/* NAV */
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  font-weight:800;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  font-size:.9rem;
+  font-weight:700;
+}
+
+.nav-links a:hover{
+  color:var(--accent);
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:110px 0 80px;
+}
+
+.hero-label{
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:2.3px;
+  font-size:.78rem;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:clamp(2.7rem,6vw,5rem);
+  max-width:950px;
+  margin:auto;
+  letter-spacing:-2px;
+}
+
+.hero-description{
+  max-width:800px;
+  margin:28px auto 0;
+  color:var(--muted);
+  font-size:1.1rem;
+}
+
+.hero-author{
+  margin-top:20px;
+  color:var(--muted);
+}
+
+.hero-author strong{
+  color:var(--text);
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.btn{
+  padding:12px 22px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:.9rem;
+  font-weight:700;
+  background:white;
+}
+
+.btn-primary{
+  background:var(--text);
+  color:white;
+  border-color:var(--text);
+}
+
+/* KPI */
+
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-top:65px;
+}
+
+.kpi{
+  padding:30px 18px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.kpi-value{
+  color:var(--accent);
+  font-size:2rem;
+  font-weight:850;
+}
+
+.kpi-label{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+/* CARDS */
+
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:35px;
+}
+
+.card{
+  padding:28px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.card-icon{
+  font-size:1.4rem;
+  margin-bottom:15px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.research-question{
+  margin-top:35px;
+  padding:30px;
+  border-left:5px solid var(--accent);
+  background:var(--soft);
+  border-radius:0 var(--radius) var(--radius) 0;
+}
+
+.research-question strong{
+  display:block;
+  margin-bottom:8px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:28px;
+}
+
+.tag{
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:8px 15px;
+  font-size:.82rem;
+  font-weight:700;
+}
+
+/* RESULTS */
+
+.results-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:35px;
+}
+
+.result-card{
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.result-number{
+  color:var(--accent);
+  font-size:1.8rem;
+  font-weight:850;
+}
+
+.result-card p{
+  color:var(--muted);
+  margin-top:7px;
+}
+
+/* VISUALS */
+
+.visual-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:26px;
+  margin-top:40px;
+}
+
+.figure-card{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px;
+  box-shadow:var(--shadow);
+  background:white;
+}
+
+.figure-card.wide{
+  grid-column:1/-1;
+}
+
+.chart-wrap{
+  position:relative;
+  width:100%;
+  height:330px;
+}
+
+.chart-wrap.large{
+  height:520px;
+}
+
+canvas{
+  width:100%;
+  height:100%;
+}
+
+.figure-caption{
+  padding-top:18px;
+}
+
+.figure-caption p{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* MODEL */
+
+.model-highlight{
+  margin-top:35px;
+  padding:35px;
+  background:#eaf6f4;
+  border:1px solid #c9e9e5;
+  border-radius:var(--radius);
+}
+
+.model-name{
+  font-size:1.5rem;
+  font-weight:850;
+  margin-bottom:20px;
+}
+
+.model-metrics{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.metric{
+  background:white;
+  border:1px solid var(--border);
+  padding:18px 22px;
+  border-radius:14px;
+  min-width:150px;
+}
+
+.metric strong{
+  display:block;
+  color:var(--accent);
+  font-size:1.55rem;
+}
+
+.metric span{
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+/* FINDINGS */
+
+.finding{
+  padding:25px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.finding-title{
+  color:var(--accent);
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.finding p{
+  color:var(--muted);
+}
+
+/* LIMITATIONS */
+
+.limitations{
+  background:var(--soft);
+}
+
+.limit-box{
+  margin-top:30px;
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:white;
+}
+
+.limit-box ul{
+  padding-left:20px;
+}
+
+.limit-box li{
+  margin:9px 0;
+  color:var(--muted);
+}
+
+/* CTA */
+
+.cta{
+  text-align:center;
+  padding:100px 0;
+}
+
+.cta p{
+  max-width:700px;
+  margin:15px auto 0;
+  color:var(--muted);
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:35px 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+@media(max-width:850px){
+  .kpi-grid,
+  .card-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .results-grid,
+  .visual-grid{
+    grid-template-columns:1fr;
+  }
+
+  .figure-card.wide{
+    grid-column:auto;
+  }
+
+  .nav-links{
+    display:none;
+  }
+}
+
+@media(max-width:550px){
+  .kpi-grid,
+  .card-grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:60px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a class="brand" href="#home">Reddit Mental Health NLP</a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#analysis">Full Analysis</a>
+      <a href="reddit_mental_health_analysis.ipynb">Notebook</a>
+      <a href="https://github.com/ayaa137/Reddit-Mental-Health-NLP-Analysis"
+         target="_blank">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+
+<header class="hero" id="home">
+
+<div class="container">
+
+<div class="hero-label">
+NLP · DATA SCIENCE · SOCIAL MEDIA ANALYSIS
+</div>
+
+<h1>
+Reddit Mental-Health Discussions:
+NLP Analysis
+</h1>
+
+<p class="hero-description">
+An analysis of Reddit mental-health discussions from 2019–2022,
+exploring discussion volume, sentiment, vocabulary and
+community-level language patterns using NLP and machine learning.
+</p>
+
+<p class="hero-author">
+Developed by <strong>Aya Abdine</strong>
+</p>
+
+<div class="buttons">
+
+<a class="btn" href="#analysis">
+View Full Analysis
+</a>
+
+<a class="btn btn-primary"
+href="https://github.com/ayaa137/Reddit-Mental-Health-NLP-Analysis"
+target="_blank">
+View GitHub Repository
+</a>
+
+</div>
+
+
+<div class="kpi-grid">
+
+<div class="kpi">
+<div class="kpi-value">213,838</div>
+<div class="kpi-label">Usable Reddit Posts</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-value">219</div>
+<div class="kpi-label">Raw CSV Files</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-value">5</div>
+<div class="kpi-label">Mental-Health Communities</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-value">0.588</div>
+<div class="kpi-label">Best Model Accuracy</div>
+</div>
+
+</div>
+
+</div>
+</header>
+
+
+<section id="analysis">
+
+<div class="container">
+
+<div class="section-label">About the Project</div>
+
+<h2>Project Overview</h2>
+
+<p class="lead">
+Reddit mental-health communities contain large amounts of
+user-generated text about emotions, relationships, daily challenges,
+treatment, isolation and personal experiences. This project explores
+how these discussions differ across communities and over time.
+</p>
+
+<div class="research-question">
+
+<strong>Research Question</strong>
+
+How do discussion volume, sentiment, vocabulary and language patterns
+differ across Reddit mental-health communities and over time?
+
+</div>
+
+<div class="tags">
+<span class="tag">Anxiety</span>
+<span class="tag">Depression</span>
+<span class="tag">Loneliness</span>
+<span class="tag">Mental Health</span>
+<span class="tag">SuicideWatch</span>
+</div>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Experimental Data</div>
+
+<h2>Reddit Mental-Health Dataset</h2>
+
+<p class="lead">
+The project combines monthly Reddit exports from five mental-health
+communities covering January 2019 through August 2022.
+</p>
+
+<div class="card-grid">
+
+<div class="card">
+<div class="card-icon">📄</div>
+<h3>219 Raw Files</h3>
+<p>
+Monthly Reddit CSV exports are combined while preserving the raw data.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🧹</div>
+<h3>213,838 Usable Posts</h3>
+<p>
+Posts are cleaned and prepared before sentiment, vocabulary and
+machine-learning analysis.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">📅</div>
+<h3>2019–2022</h3>
+<p>
+The dataset covers January 2019 through August 2022.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Methodology</div>
+
+<h2>Analysis Approach</h2>
+
+<div class="card-grid">
+
+<div class="card">
+<div class="card-icon">🧹</div>
+<h3>Data Cleaning</h3>
+<p>
+Dates, communities, duplicate text and unusable posts are prepared
+for analysis.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">📊</div>
+<h3>Exploratory Analysis</h3>
+<p>
+Discussion volume is compared across communities and time.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">💬</div>
+<h3>VADER Sentiment</h3>
+<p>
+Emotional tone is measured using VADER sentiment analysis.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🔤</div>
+<h3>TF-IDF Analysis</h3>
+<p>
+Community-specific vocabulary is extracted using TF-IDF.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🤖</div>
+<h3>Machine Learning</h3>
+<p>
+Text classifiers test whether language can distinguish communities.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🔎</div>
+<h3>Error Analysis</h3>
+<p>
+Classification errors reveal where community language overlaps.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Main Results</div>
+
+<h2>Key Statistics</h2>
+
+<div class="results-grid">
+
+<div class="result-card">
+<div class="result-number">Mental Health</div>
+<h3>Largest Community</h3>
+<p>
+Mental Health contains the largest number of usable posts.
+</p>
+</div>
+
+<div class="result-card">
+<div class="result-number">2019</div>
+<h3>Highest Post Volume</h3>
+<p>
+2019 contains the highest overall discussion volume.
+</p>
+</div>
+
+<div class="result-card">
+<div class="result-number">SuicideWatch</div>
+<h3>Lowest Average Sentiment</h3>
+<p>
+SuicideWatch shows the lowest average VADER sentiment.
+</p>
+</div>
+
+<div class="result-card">
+<div class="result-number">0.396</div>
+<h3>Depression F1 Score</h3>
+<p>
+Depression was the most difficult class to distinguish.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- VISUALS -->
+
+<section id="visuals">
+
+<div class="container">
+
+<div class="section-label">Visual Analysis</div>
+
+<h2>Selected Project Visualizations</h2>
+
+<p class="lead">
+These figures summarize the strongest results from the NLP analysis.
+All charts are generated directly inside this HTML file.
+</p>
+
+
+<div class="visual-grid">
+
+
+<div class="figure-card">
+
+<div class="chart-wrap">
+<canvas id="modelChart"></canvas>
+</div>
+
+<div class="figure-caption">
+<h3>Model Comparison</h3>
+<p>
+Comparison of the three final text-classification approaches.
+</p>
+</div>
+
+</div>
+
+
+<div class="figure-card">
+
+<div class="chart-wrap">
+<canvas id="classChart"></canvas>
+</div>
+
+<div class="figure-caption">
+<h3>F1 Score by Community</h3>
+<p>
+Anxiety and loneliness are the strongest classes, while depression
+shows the greatest overlap with other communities.
+</p>
+</div>
+
+</div>
+
+
+<div class="figure-card">
+
+<div class="chart-wrap">
+<canvas id="sentimentChart"></canvas>
+</div>
+
+<div class="figure-caption">
+<h3>Sentiment by Community</h3>
+<p>
+SuicideWatch shows the most negative average emotional tone,
+while loneliness is comparatively more positive.
+</p>
+</div>
+
+</div>
+
+
+<div class="figure-card">
+
+<div class="chart-wrap">
+<canvas id="tfidfChart"></canvas>
+</div>
+
+<div class="figure-caption">
+<h3>Example TF-IDF Terms: Anxiety</h3>
+<p>
+Important anxiety-community terms include panic, work, sleep,
+attack, friends and thoughts.
+</p>
+</div>
+
+</div>
+
+
+<div class="figure-card wide">
+
+<div class="chart-wrap large">
+<canvas id="confusionMatrix"></canvas>
+</div>
+
+<div class="figure-caption">
+<h3>Normalized Confusion Matrix</h3>
+<p>
+The model distinguishes anxiety and loneliness most clearly.
+Depression overlaps strongly with SuicideWatch, Mental Health
+and Loneliness.
+</p>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Machine Learning</div>
+
+<h2>Community Classification</h2>
+
+<p class="lead">
+The classification task predicts the Reddit community from post text.
+It measures differences in language patterns and should not be
+interpreted as a diagnostic model.
+</p>
+
+<div class="card-grid">
+
+<div class="card">
+<h3>Naive Bayes</h3>
+<p>
+Word-level TF-IDF with Multinomial Naive Bayes.
+</p>
+</div>
+
+<div class="card">
+<h3>LinearSVC</h3>
+<p>
+Linear SVM using word-level TF-IDF.
+</p>
+</div>
+
+<div class="card">
+<h3>LinearSVC Word + Character</h3>
+<p>
+Combined word and character TF-IDF produced the strongest result.
+</p>
+</div>
+
+</div>
+
+
+<div class="model-highlight">
+
+<div class="section-label">Best Model</div>
+
+<div class="model-name">
+LinearSVC — Word + Character TF-IDF
+</div>
+
+<div class="model-metrics">
+
+<div class="metric">
+<strong>0.588</strong>
+<span>Accuracy</span>
+</div>
+
+<div class="metric">
+<strong>0.584</strong>
+<span>Macro F1</span>
+</div>
+
+<div class="metric">
+<strong>0.581</strong>
+<span>Macro Precision</span>
+</div>
+
+<div class="metric">
+<strong>0.587</strong>
+<span>Macro Recall</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Model Interpretation</div>
+
+<h2>Why Is Depression Harder to Classify?</h2>
+
+<p class="lead">
+Depression achieved an F1 score of approximately 0.396.
+Its posts often contain broad distress language that also appears
+in SuicideWatch, Mental Health and Loneliness, making the class
+more difficult to separate.
+</p>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Insights</div>
+
+<h2>Key Findings</h2>
+
+<div class="finding">
+<div class="finding-title">
+📊 Discussion Volume Differs Across Communities
+</div>
+<p>
+Mental Health is the largest community in the cleaned dataset.
+</p>
+</div>
+
+<div class="finding">
+<div class="finding-title">
+💬 Emotional Tone Is Not Uniform
+</div>
+<p>
+The five communities differ noticeably in average sentiment.
+</p>
+</div>
+
+<div class="finding">
+<div class="finding-title">
+🔤 Communities Use Distinct Vocabulary
+</div>
+<p>
+TF-IDF reveals differences involving panic, work and school,
+relationships, isolation and immediate distress.
+</p>
+</div>
+
+<div class="finding">
+<div class="finding-title">
+🤖 Language Provides Moderate Community Separation
+</div>
+<p>
+The best model reached 0.588 accuracy and 0.584 macro F1.
+</p>
+</div>
+
+<div class="finding">
+<div class="finding-title">
+🔎 Depression Shows Strong Language Overlap
+</div>
+<p>
+Depression overlaps particularly with SuicideWatch,
+Mental Health and Loneliness.
+</p>
+</div>
+
+</div>
+</section>
+
+
+<section class="limitations">
+
+<div class="container">
+
+<div class="section-label">Critical Evaluation</div>
+
+<h2>Limitations</h2>
+
+<div class="limit-box">
+
+<ul>
+
+<li>
+Reddit users are not representative of the general population.
+</li>
+
+<li>
+Community membership is not a medical diagnosis.
+</li>
+
+<li>
+VADER cannot fully capture complex mental-health language.
+</li>
+
+<li>
+The available dataset ends in August 2022.
+</li>
+
+<li>
+The classifier predicts community membership, not mental-health
+conditions.
+</li>
+
+</ul>
+
+</div>
+
+</div>
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-label">Tools</div>
+
+<h2>Technologies Used</h2>
+
+<div class="tags">
+
+<span class="tag">Python</span>
+<span class="tag">pandas</span>
+<span class="tag">NumPy</span>
+<span class="tag">Matplotlib</span>
+<span class="tag">Seaborn</span>
+<span class="tag">scikit-learn</span>
+<span class="tag">VADER</span>
+<span class="tag">TF-IDF</span>
+<span class="tag">Jupyter Notebook</span>
+<span class="tag">Git</span>
+<span class="tag">GitHub</span>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="cta">
+
+<div class="container">
+
+<div class="section-label">Project Resources</div>
+
+<h2>Explore the Full Project</h2>
+
+<p>
+View the complete notebook for preprocessing, exploratory analysis,
+sentiment analysis, TF-IDF, machine learning and final conclusions.
+</p>
+
+<div class="buttons">
+
+<a class="btn"
+href="reddit_mental_health_analysis.ipynb">
+Open Notebook
+</a>
+
+<a class="btn btn-primary"
+href="https://github.com/ayaa137/Reddit-Mental-Health-NLP-Analysis"
+target="_blank">
+GitHub Repository
+</a>
+
+</div>
+
+</div>
+</section>
+
+
+<footer>
+
+<strong>Aya Abdine</strong><br>
+
+Data Science · Natural Language Processing
+
+</footer>
+
+
+<script>
+
+/* ---------- helpers ---------- */
+
+const accent = "#128277";
+const text = "#17202a";
+const muted = "#667085";
+const grid = "#e4e7ec";
+
+function setupCanvas(id){
+
+  const canvas = document.getElementById(id);
+
+  const ratio = window.devicePixelRatio || 1;
+
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+
+  canvas.width = w * ratio;
+  canvas.height = h * ratio;
+
+  const ctx = canvas.getContext("2d");
+
+  ctx.scale(ratio,ratio);
+
+  return {
+    canvas,
+    ctx,
+    w,
+    h
+  };
+}
+
+
+/* ---------- BAR CHART ---------- */
+
+function barChart(id, labels, values, title, min=0, max=null){
+
+  const {ctx,w,h} = setupCanvas(id);
+
+  max = max ?? Math.max(...values) * 1.1;
+
+  const left = 70;
+  const right = 25;
+  const top = 50;
+  const bottom = 65;
+
+  const cw = w-left-right;
+  const ch = h-top-bottom;
+
+  ctx.font = "bold 16px Arial";
+  ctx.fillStyle = text;
+  ctx.textAlign = "center";
+
+  ctx.fillText(title,w/2,25);
+
+  ctx.font = "12px Arial";
+
+  for(let i=0;i<=5;i++){
+
+    const y = top + ch - (i/5)*ch;
+
+    ctx.strokeStyle = grid;
+    ctx.beginPath();
+    ctx.moveTo(left,y);
+    ctx.lineTo(w-right,y);
+    ctx.stroke();
+
+    const value = min+(max-min)*(i/5);
+
+    ctx.fillStyle = muted;
+    ctx.textAlign = "right";
+    ctx.fillText(value.toFixed(2),left-10,y+4);
+  }
+
+  const space = cw/values.length;
+  const width = Math.min(70,space*.58);
+
+  values.forEach((v,i)=>{
+
+    const bh = ((v-min)/(max-min))*ch;
+
+    const x = left + i*space + space/2-width/2;
+    const y = top+ch-bh;
+
+    ctx.fillStyle = accent;
+    ctx.fillRect(x,y,width,bh);
+
+    ctx.fillStyle = text;
+    ctx.textAlign = "center";
+    ctx.font = "bold 12px Arial";
+
+    ctx.fillText(v.toFixed(3),x+width/2,y-8);
+
+    ctx.save();
+
+    ctx.translate(x+width/2,h-bottom+15);
+    ctx.rotate(-.35);
+
+    ctx.fillStyle = muted;
+    ctx.font = "11px Arial";
+
+    ctx.fillText(labels[i],0,0);
+
+    ctx.restore();
+
+  });
+
+}
+
+
+/* ---------- HORIZONTAL BAR ---------- */
+
+function horizontalBar(id, labels, values, title){
+
+  const {ctx,w,h} = setupCanvas(id);
+
+  const left = 110;
+  const right = 30;
+  const top = 50;
+  const bottom = 25;
+
+  const cw = w-left-right;
+  const ch = h-top-bottom;
+
+  const max = Math.max(...values)*1.1;
+
+  ctx.fillStyle = text;
+  ctx.font = "bold 16px Arial";
+  ctx.textAlign = "center";
+
+  ctx.fillText(title,w/2,25);
+
+  const space = ch/values.length;
+  const barHeight = space*.55;
+
+  labels.forEach((label,i)=>{
+
+    const y = top+i*space+space/2-barHeight/2;
+
+    ctx.fillStyle = muted;
+    ctx.font = "12px Arial";
+    ctx.textAlign = "right";
+
+    ctx.fillText(label,left-10,y+barHeight*.68);
+
+    ctx.fillStyle = accent;
+
+    const width = values[i]/max*cw;
+
+    ctx.fillRect(left,y,width,barHeight);
+
+    ctx.fillStyle = text;
+    ctx.textAlign = "left";
+
+    ctx.fillText(values[i].toFixed(3),left+width+8,y+barHeight*.68);
+
+  });
+
+}
+
+
+/* ---------- SENTIMENT ---------- */
+
+function sentimentChart(){
+
+  const labels = [
+    "Anxiety",
+    "Depression",
+    "Loneliness",
+    "Mental Health",
+    "SuicideWatch"
+  ];
+
+  const values = [
+    -0.24,
+    -0.25,
+    0.10,
+    -0.20,
+    -0.41
+  ];
+
+  const {ctx,w,h} = setupCanvas("sentimentChart");
+
+  const left=115;
+  const right=35;
+  const top=50;
+  const bottom=30;
+
+  const cw=w-left-right;
+  const ch=h-top-bottom;
+
+  const min=-0.45;
+  const max=0.15;
+
+  ctx.fillStyle=text;
+  ctx.font="bold 16px Arial";
+  ctx.textAlign="center";
+
+  ctx.fillText("Average VADER Sentiment",w/2,25);
+
+  const zeroX=
+    left+(0-min)/(max-min)*cw;
+
+  ctx.strokeStyle="#999";
+  ctx.beginPath();
+  ctx.moveTo(zeroX,top);
+  ctx.lineTo(zeroX,h-bottom);
+  ctx.stroke();
+
+  const space=ch/labels.length;
+
+  labels.forEach((label,i)=>{
+
+    const y=top+i*space+space*.25;
+
+    ctx.fillStyle=muted;
+    ctx.font="12px Arial";
+    ctx.textAlign="right";
+
+    ctx.fillText(
+      label,
+      left-10,
+      y+space*.28
+    );
+
+    const value=values[i];
+
+    const x=
+      left+(value-min)/(max-min)*cw;
+
+    ctx.fillStyle=accent;
+
+    if(value>=0){
+      ctx.fillRect(
+        zeroX,
+        y,
+        x-zeroX,
+        space*.5
+      );
+    }
+    else{
+      ctx.fillRect(
+        x,
+        y,
+        zeroX-x,
+        space*.5
+      );
+    }
+
+    ctx.fillStyle=text;
+
+    ctx.textAlign=
+      value>=0 ? "left" : "right";
+
+    ctx.fillText(
+      value.toFixed(2),
+      value>=0 ? x+6 : x-6,
+      y+space*.35
+    );
+
+  });
+
+}
+
+
+/* ---------- CONFUSION MATRIX ---------- */
+
+function drawConfusionMatrix(){
+
+const labels=[
+"Anxiety",
+"Depression",
+"Loneliness",
+"Mental Health",
+"SuicideWatch"
+];
+
+const matrix=[
+
+[0.76,0.06,0.03,0.12,0.03],
+
+[0.07,0.37,0.15,0.19,0.22],
+
+[0.02,0.09,0.74,0.07,0.08],
+
+[0.15,0.15,0.07,0.51,0.12],
+
+[0.06,0.20,0.08,0.12,0.55]
+
+];
+
+const {ctx,w,h}=setupCanvas("confusionMatrix");
+
+const marginLeft=135;
+const marginTop=70;
+const bottom=100;
+const right=35;
+
+const size=
+Math.min(
+w-marginLeft-right,
+h-marginTop-bottom
+);
+
+const cell=size/5;
+
+ctx.fillStyle=text;
+ctx.font="bold 17px Arial";
+ctx.textAlign="center";
+
+ctx.fillText(
+"Normalized Confusion Matrix",
+marginLeft+size/2,
+25
+);
+
+
+for(let r=0;r<5;r++){
+
+  for(let c=0;c<5;c++){
+
+    const value=matrix[r][c];
+
+    const alpha=.12 + value*.9;
+
+    ctx.fillStyle=
+      `rgba(18,130,119,${alpha})`;
+
+    ctx.fillRect(
+      marginLeft+c*cell,
+      marginTop+r*cell,
+      cell,
+      cell
+    );
+
+    ctx.strokeStyle="white";
+    ctx.strokeRect(
+      marginLeft+c*cell,
+      marginTop+r*cell,
+      cell,
+      cell
+    );
+
+    ctx.fillStyle=
+      value>.45 ? "white" : text;
+
+    ctx.font="bold 14px Arial";
+    ctx.textAlign="center";
+
+    ctx.fillText(
+      value.toFixed(2),
+      marginLeft+c*cell+cell/2,
+      marginTop+r*cell+cell/2+5
+    );
+
+  }
+
+}
+
+
+ctx.font="12px Arial";
+ctx.fillStyle=muted;
+
+
+labels.forEach((label,i)=>{
+
+  ctx.textAlign="right";
+
+  ctx.fillText(
+    label,
+    marginLeft-12,
+    marginTop+i*cell+cell/2+4
+  );
+
+
+  ctx.save();
+
+  ctx.translate(
+    marginLeft+i*cell+cell/2,
+    marginTop+size+18
+  );
+
+  ctx.rotate(-.45);
+
+  ctx.textAlign="right";
+
+  ctx.fillText(
+    label,
+    0,
+    0
+  );
+
+  ctx.restore();
+
+});
+
+
+ctx.font="bold 13px Arial";
+ctx.fillStyle=text;
+ctx.textAlign="center";
+
+ctx.fillText(
+"Predicted Community",
+marginLeft+size/2,
+h-10
+);
+
+
+ctx.save();
+
+ctx.translate(
+20,
+marginTop+size/2
+);
+
+ctx.rotate(-Math.PI/2);
+
+ctx.fillText(
+"Actual Community",
+0,
+0
+);
+
+ctx.restore();
+
+}
+
+
+/* ---------- DRAW ALL ---------- */
+
+function drawAll(){
+
+barChart(
+"modelChart",
+[
+"LinearSVC word + char",
+"Naive Bayes",
+"LinearSVC word"
+],
+[
+0.584,
+0.522,
+0.516
+],
+"Macro F1 by Model",
+0,
+0.65
+);
+
+
+barChart(
+"classChart",
+[
+"Anxiety",
+"Depression",
+"Loneliness",
+"Mental Health",
+"SuicideWatch"
+],
+[
+0.742,
+0.396,
+0.715,
+0.512,
+0.555
+],
+"F1 Score by Community",
+0,
+0.80
+);
+
+
+sentimentChart();
+
+
+horizontalBar(
+"tfidfChart",
+[
+"panic",
+"work",
+"job",
+"sleep",
+"attack",
+"friends",
+"stop",
+"started",
+"thoughts",
+"scared"
+],
+[
+0.0222,
+0.0220,
+0.0173,
+0.0172,
+0.0171,
+0.0155,
+0.0155,
+0.0152,
+0.0146,
+0.0145
+],
+"Top Anxiety TF-IDF Terms"
+);
+
+
+drawConfusionMatrix();
+
+}
+
+
+window.addEventListener(
+"load",
+drawAll
+);
+
+
+let resizeTimer;
+
+window.addEventListener(
+"resize",
+()=>{
+
+clearTimeout(resizeTimer);
+
+resizeTimer=setTimeout(
+drawAll,
+200
+);
+
+}
+);
+
+</script>
+
+</body>
+</html>

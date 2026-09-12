@@ -1,0 +1,9 @@
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.DS_Store
+*.numbers
+2019/
+2020/
+2021/
+2022/
