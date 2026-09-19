@@ -373,8 +373,9 @@ Constructor University
 **GitHub Repository:**  
 https://github.com/ayaa137/Reddit-Mental-Health-NLP-Analysis
 
-**Portfolio Page:**  
-Open `index.html` locally or through GitHub Pages once published.
+## 🌐 Portfolio Website
+
+https://ayaa137.github.io/Reddit-Mental-Health-NLP-Analysis/
 
 ---
 
